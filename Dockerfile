@@ -24,12 +24,18 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy Python project files
-COPY pyproject.toml README.md ./
-COPY outbreak_traceability_sim/ ./outbreak_traceability_sim/
+# Install Python dependencies directly (faster, avoids metadata issues)
+RUN pip install --no-cache-dir \
+    pydantic>=2.0.0 \
+    numpy>=1.24.0 \
+    scipy>=1.10.0 \
+    fastapi>=0.100.0 \
+    uvicorn>=0.23.0 \
+    jinja2>=3.0.0 \
+    openpyxl>=3.1.0
 
-# Install Python dependencies
-RUN pip install --no-cache-dir ".[web]"
+# Copy Python project files
+COPY outbreak_traceability_sim/ ./outbreak_traceability_sim/
 
 # Copy built frontend from build stage
 COPY --from=frontend-build /app/frontend/dist ./static
