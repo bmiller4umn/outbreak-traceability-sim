@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy Python project files
-COPY pyproject.toml ./
+COPY pyproject.toml README.md ./
 COPY outbreak_traceability_sim/ ./outbreak_traceability_sim/
 
 # Install Python dependencies
