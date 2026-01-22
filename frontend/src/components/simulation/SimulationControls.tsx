@@ -31,36 +31,35 @@ export default function SimulationControls() {
 
   return (
     <div className="h-full overflow-y-auto p-4 space-y-4">
-      <div className="flex items-center justify-between">
-        <div className="font-semibold text-lg">Configuration</div>
-        <div className="flex space-x-2">
-          <Button
-            onClick={startSimulation}
-            disabled={isRunning}
-            size="sm"
-          >
-            {isRunning ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Running...
-              </>
-            ) : (
-              <>
-                <Play className="mr-2 h-4 w-4" />
-                Run Simulation
-              </>
-            )}
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={resetConfig}
-            disabled={isRunning}
-            className="h-8 w-8"
-          >
-            <RotateCcw className="h-4 w-4" />
-          </Button>
-        </div>
+      <div className="font-semibold text-lg">Configuration</div>
+
+      {/* Run Simulation Button */}
+      <div className="flex space-x-2">
+        <Button
+          className="flex-1"
+          onClick={startSimulation}
+          disabled={isRunning}
+        >
+          {isRunning ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Running...
+            </>
+          ) : (
+            <>
+              <Play className="mr-2 h-4 w-4" />
+              Run Simulation
+            </>
+          )}
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={resetConfig}
+          disabled={isRunning}
+        >
+          <RotateCcw className="h-4 w-4" />
+        </Button>
       </div>
 
       {/* Network Size */}
