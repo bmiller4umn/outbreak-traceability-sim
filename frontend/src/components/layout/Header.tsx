@@ -1,5 +1,6 @@
+import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { useSimulationStore, selectStatus, selectProgress } from '@/store'
+import { useSimulationStore, selectStatus, selectProgress, useConfigStore, selectMonteCarloEnabled } from '@/store'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { Activity, GitCompare, Search, BarChart3, BookOpen, Info } from 'lucide-react'
@@ -9,7 +10,7 @@ const navItems = [
   { path: '/', label: 'Simulate', icon: Activity },
   { path: '/compare', label: 'Compare', icon: GitCompare },
   { path: '/investigate', label: 'Investigate', icon: Search },
-  { path: '/monte-carlo', label: 'Monte Carlo', icon: BarChart3 },
+  { path: '/monte-carlo', label: 'Monte Carlo', icon: BarChart3, requiresMonteCarlo: true },
   { path: '/guide', label: 'User Guide', icon: BookOpen },
   { path: '/about', label: 'About', icon: Info },
 ]
@@ -18,6 +19,17 @@ export default function Header() {
   const location = useLocation()
   const status = useSimulationStore(selectStatus)
   const progress = useSimulationStore(selectProgress)
+  const fetchConfig = useConfigStore((s) => s.fetchConfig)
+  const monteCarloEnabled = useConfigStore(selectMonteCarloEnabled)
+
+  useEffect(() => {
+    fetchConfig()
+  }, [fetchConfig])
+
+  // Filter nav items based on feature flags
+  const visibleNavItems = navItems.filter(
+    (item) => !item.requiresMonteCarlo || monteCarloEnabled
+  )
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -30,7 +42,7 @@ export default function Header() {
 
         {/* Navigation */}
         <nav className="flex items-center space-x-1">
-          {navItems.map(({ path, label, icon: Icon }) => (
+          {visibleNavItems.map(({ path, label, icon: Icon }) => (
             <Link
               key={path}
               to={path}

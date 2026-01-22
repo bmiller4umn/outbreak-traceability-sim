@@ -12,5 +12,7 @@ services:
         value: "100"
       - key: DEFAULT_MONTE_CARLO_ITERATIONS
         value: "50"
+      - key: MONTE_CARLO_ENABLED
+        value: "false"
       - key: CORS_ORIGINS
         value: "*"  # Allow all since frontend is served from same origin

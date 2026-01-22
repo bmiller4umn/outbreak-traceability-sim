@@ -11,6 +11,7 @@ interface ConfigStore {
 const DEFAULT_CONFIG: AppConfig = {
   maxMonteCarloIterations: 10000,
   defaultMonteCarloIterations: 1000,
+  monteCarloEnabled: true,
 }
 
 export const useConfigStore = create<ConfigStore>((set, get) => ({
@@ -35,3 +36,7 @@ export const useConfigStore = create<ConfigStore>((set, get) => ({
 // Selector for max Monte Carlo iterations
 export const selectMaxMonteCarloIterations = (state: ConfigStore) =>
   state.config?.maxMonteCarloIterations ?? DEFAULT_CONFIG.maxMonteCarloIterations
+
+// Selector for Monte Carlo enabled
+export const selectMonteCarloEnabled = (state: ConfigStore) =>
+  state.config?.monteCarloEnabled ?? DEFAULT_CONFIG.monteCarloEnabled

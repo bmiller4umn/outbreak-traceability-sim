@@ -14,6 +14,9 @@ class AppConfig:
     max_monte_carlo_iterations: int = 10000  # Default allows up to 10000
     default_monte_carlo_iterations: int = 1000
 
+    # Feature flags
+    monte_carlo_enabled: bool = True  # Set to False to disable Monte Carlo
+
     # CORS origins (comma-separated list)
     cors_origins: list[str] = None
 
@@ -40,9 +43,13 @@ class AppConfig:
         if render_url and render_url not in cors_origins and cors_origins != ["*"]:
             cors_origins.append(render_url)
 
+        # Feature flags
+        mc_enabled = os.getenv("MONTE_CARLO_ENABLED", "true").lower() not in ("false", "0", "no")
+
         return cls(
             max_monte_carlo_iterations=max_mc,
             default_monte_carlo_iterations=default_mc,
+            monte_carlo_enabled=mc_enabled,
             cors_origins=cors_origins,
         )
 

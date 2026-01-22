@@ -51,6 +51,7 @@ async def get_config():
     return {
         "maxMonteCarloIterations": config.max_monte_carlo_iterations,
         "defaultMonteCarloIterations": config.default_monte_carlo_iterations,
+        "monteCarloEnabled": config.monte_carlo_enabled,
     }
 
 

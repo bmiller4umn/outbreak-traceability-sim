@@ -3,6 +3,7 @@ import { api } from './client'
 export interface AppConfig {
   maxMonteCarloIterations: number
   defaultMonteCarloIterations: number
+  monteCarloEnabled: boolean
 }
 
 export const configApi = {

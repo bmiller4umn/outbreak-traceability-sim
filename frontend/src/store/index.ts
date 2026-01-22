@@ -3,4 +3,4 @@ export { useNetworkStore, selectFilteredNodes, selectFilteredEdges, selectNodeBy
 export { useInvestigationStore, selectCurrentDeterministicStep, selectCurrentProbabilisticStep, selectDeterministicPath, selectProbabilisticPath, selectCurrentProbability, selectTopConvergenceResult } from './investigationStore'
 export { useUIStore, selectSidebarCollapsed, selectActiveTab, selectGraphSettings } from './uiStore'
 export { useMonteCarloStore, selectMonteCarloStatus, selectMonteCarloProgress, selectMonteCarloResult, selectHasMonteCarloResult } from './monteCarloStore'
-export { useConfigStore, selectMaxMonteCarloIterations } from './configStore'
+export { useConfigStore, selectMaxMonteCarloIterations, selectMonteCarloEnabled } from './configStore'
